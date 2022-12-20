@@ -1,8 +1,21 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/launch_page/main.css": "/launch_page/main.css",
     "/img/favicon.svg": "/img/favicon.svg",
     "/js/company.js": "/js/company.js",
     "/js/address.js": "/js/address.js",
-    "/js/phone.js": "/js/phone.js"
+    "/js/phone.js": "/js/phone.js",
+    "/launch_page/vendors/bootstrap/grid.css": "/launch_page/vendors/bootstrap/grid.css",
+    "/launch_page/vendors/bootstrap/YTPlayer/css/YTPlayer.css": "/launch_page/vendors/bootstrap/YTPlayer/css/YTPlayer.css",
+    "/launch_page/vendors/vegas/vegas.css": "/launch_page/vendors/vegas/vegas.css",
+    "/launch_page/vendors/jquery/jquery.js": "/launch_page/vendors/jquery/jquery.js",
+    "/launch_page/vendors/jquery.countdown/jquery.countdown.js": "/launch_page/vendors/jquery.countdown/jquery.countdown.js",
+    "/launch_page/vendors/flat-surface-shader/fss.js": "/launch_page/vendors/flat-surface-shader/fss.js",
+    "/launch_page/vendors/particles.js/particles.js": "/launch_page/vendors/particles.js/particles.js",
+    "/launch_page/vendors/waterpipe/waterpipe.js": "/launch_page/vendors/waterpipe/waterpipe.js",
+    "/launch_page/js/main.js": "/launch_page/js/main.js",
+    "/launch_page/vendors/quietflow/quietflow.js": "/launch_page/vendors/quietflow/quietflow.js",
+    "/launch_page/vendors/YTPlayer/YTPlayer.js": "/launch_page/vendors/YTPlayer/YTPlayer.js",
+    "/launch_page/vendors/vegas/vegas.js": "/launch_page/vendors/vegas/vegas.js"
 }
