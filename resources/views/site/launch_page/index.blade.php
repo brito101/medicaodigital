@@ -44,7 +44,7 @@
                                 <div class="hero__title_inner"><span class="hero__icon">M</span>
                                     <h1 class="hero__title">Medição Digital</h1>
                                     <p class="hero__text">A medição nas suas mãos. Estamos quase prontos para o
-                                        lançamento</p>
+                                        lançamento!!!</p>
                                 </div>
                             </div>
                         </div>
