@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\{
     ACL\PermissionController,
     ACL\RoleController,
     AdminController,
+    ComplexController,
     UserController
 };
 use App\Http\Controllers\Site\{
@@ -15,17 +16,6 @@ use Illuminate\Support\Facades\{
     Route
 };
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::group(['middleware' => ['auth']], function () {
     Route::get('admin', [AdminController::class, 'index'])->name('admin.home');
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -36,6 +26,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/user/edit', [UserController::class, 'edit'])->name('user.edit');
         Route::get('/users/destroy/{id}', [UserController::class, 'destroy']);
         Route::resource('users', UserController::class);
+
+        /** Complexes */
+        Route::get('/complexes/destroy/{id}', [ComplexController::class, 'destroy']);
+        Route::resource('complexes', ComplexController::class);
 
         /**
          * ACL

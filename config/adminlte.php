@@ -264,6 +264,26 @@ return [
             ],
         ],
         [
+            'text'        => 'Condomínios',
+            'url'         => '#',
+            'icon'        => 'fas fa-fw fa-building',
+            'can'         => 'Acessar Condomínios',
+            'submenu' => [
+                [
+                    'text' => 'Listagem de Condomínios',
+                    'url'  => 'admin/complexes',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Listar Condomínios',
+                ],
+                [
+                    'text' => 'Cadastrar Condomínio',
+                    'url'  => 'admin/complexes/create',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Criar Condomínios',
+                ],
+            ]
+        ],
+        [
             'text'    => 'ACL',
             'icon'    => 'fas fa-fw fa-user-shield',
             'can'     => 'Acessar ACL',
