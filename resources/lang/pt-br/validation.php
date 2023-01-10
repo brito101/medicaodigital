@@ -221,7 +221,9 @@ return [
         'end' => 'término',
         'contract' => 'regime contratual',
         'activities' => 'atividades',
-        'photo' => 'foto'
+        'photo' => 'foto',
+        'complex_id' => 'condomínio',
+        'block_id' => 'bloco',
     ],
 
 ];

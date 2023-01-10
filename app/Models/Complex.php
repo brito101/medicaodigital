@@ -27,4 +27,10 @@ class Complex extends Model
         'city',
         'status'
     ];
+
+    /** Relationships */
+    public function complex()
+    {
+        return $this->hasMany(Block::class);
+    }
 }

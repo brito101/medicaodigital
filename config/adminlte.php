@@ -266,7 +266,7 @@ return [
         [
             'text'        => 'Condomínios',
             'url'         => '#',
-            'icon'        => 'fas fa-fw fa-building',
+            'icon'        => 'fas fa-fw fa-map-marked',
             'can'         => 'Acessar Condomínios',
             'submenu' => [
                 [
@@ -280,6 +280,46 @@ return [
                     'url'  => 'admin/complexes/create',
                     'icon' => 'fas fa-fw fa-chevron-right',
                     'can'  => 'Criar Condomínios',
+                ],
+            ]
+        ],
+        [
+            'text'        => 'Blocos',
+            'url'         => '#',
+            'icon'        => 'fas fa-fw fa-building',
+            'can'         => 'Acessar Blocos',
+            'submenu' => [
+                [
+                    'text' => 'Listagem de Blocos',
+                    'url'  => 'admin/blocks',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Listar Blocos',
+                ],
+                [
+                    'text' => 'Cadastrar Bloco',
+                    'url'  => 'admin/blocks/create',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Criar Blocos',
+                ],
+            ]
+        ],
+        [
+            'text'        => 'Apartamentos',
+            'url'         => '#',
+            'icon'        => 'fas fa-fw fa-home',
+            'can'         => 'Acessar Apartamentos',
+            'submenu' => [
+                [
+                    'text' => 'Listagem de Apartamentos',
+                    'url'  => 'admin/apartments',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Listar Apartamentos',
+                ],
+                [
+                    'text' => 'Cadastrar Apartamento',
+                    'url'  => 'admin/apartments/create',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Criar Apartamentos',
                 ],
             ]
         ],

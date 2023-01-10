@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\{
     ACL\PermissionController,
     ACL\RoleController,
     AdminController,
+    ApartmentController,
+    BlockController,
     ComplexController,
     UserController
 };
@@ -30,6 +32,14 @@ Route::group(['middleware' => ['auth']], function () {
         /** Complexes */
         Route::get('/complexes/destroy/{id}', [ComplexController::class, 'destroy']);
         Route::resource('complexes', ComplexController::class);
+
+        /** Blocks */
+        Route::get('/blocks/destroy/{id}', [BlockController::class, 'destroy']);
+        Route::resource('blocks', BlockController::class);
+
+        /** Apartments */
+        Route::get('/apartments/destroy/{id}', [ApartmentController::class, 'destroy']);
+        Route::resource('apartments', ApartmentController::class);
 
         /**
          * ACL

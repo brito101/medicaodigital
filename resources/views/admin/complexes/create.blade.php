@@ -1,5 +1,4 @@
 @extends('adminlte::page')
-@section('plugins.BsCustomFileInput', true)
 @section('plugins.select2', true)
 
 @section('title', '- Cadastro de Condomínio')
@@ -11,7 +10,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><i class="fas fa-fw fa-building"></i> Novo Condomínio</h1>
+                    <h1><i class="fas fa-fw fa-map-marked"></i> Novo Condomínio</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">

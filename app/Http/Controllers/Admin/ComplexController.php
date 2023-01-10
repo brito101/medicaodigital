@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ComplexRequest;
+use App\Models\Apartment;
+use App\Models\Block;
 use App\Models\Complex;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -119,7 +121,7 @@ class ComplexController extends Controller
      */
     public function update(ComplexRequest $request, $id)
     {
-        if (!Auth::user()->hasPermissionTo('Criar Condomínios')) {
+        if (!Auth::user()->hasPermissionTo('Editar Condomínios')) {
             abort(403, 'Acesso não autorizado');
         }
 
@@ -159,7 +161,16 @@ class ComplexController extends Controller
             abort(403, 'Acesso não autorizado');
         }
 
+        $blocks = Block::where('complex_id', $complex->id)->get();
+
         if ($complex->delete()) {
+            foreach ($blocks as $block) {
+                $apartments = Apartment::where('block_id', $block->id)->get();
+                foreach ($apartments as $apartment) {
+                    $apartment->delete();
+                }
+                $block->delete();
+            }
             return redirect()
                 ->route('admin.complexes.index')
                 ->with('success', 'Exclusão realizada!');
