@@ -16,6 +16,7 @@ class CreateMetersTable extends Migration
         Schema::create('meters', function (Blueprint $table) {
             $table->id();
             $table->string('register');
+            $table->string('location');
             $table->foreignId('apartment_id')
                 ->constrained()
                 ->onUpdate('cascade')

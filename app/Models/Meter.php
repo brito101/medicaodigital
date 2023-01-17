@@ -12,7 +12,7 @@ class Meter extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['register', 'apartment_id'];
+    protected $fillable = ['register', 'location', 'apartment_id'];
 
     /** Relationships */
     public function apartment()

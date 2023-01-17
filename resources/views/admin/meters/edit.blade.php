@@ -48,7 +48,14 @@
                                             name="register" value="{{ old('register') ?? $meter->register }}" required>
                                     </div>
 
-                                    <div class="col-12 col-md-6 form-group px-0 pl-md-2 mb-0">
+                                    <div class="col-12 col-md-6 form-group px-0 pl-md-2">
+                                        <label for="location">Localização</label>
+                                        <input type="text" class="form-control" id="location"
+                                            placeholder="Localização do medidor" name="location"
+                                            value="{{ old('location') ?? $meter->location }}">
+                                    </div>
+
+                                    <div class="col-12 form-group px-0 mb-0">
                                         <label for="apartment_id">Apartamento</label>
                                         <x-adminlte-select2 name="apartment_id">
                                             @foreach ($apartments as $apartment)

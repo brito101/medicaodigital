@@ -25,6 +25,7 @@ class MeterRequest extends FormRequest
     {
         return [
             'register' => 'required|min:1|max:100',
+            'location' => 'nullable|max:191',
             'apartment_id' => 'required|exists:apartments,id',
         ];
     }

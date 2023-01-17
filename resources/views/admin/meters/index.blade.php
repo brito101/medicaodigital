@@ -40,10 +40,10 @@
                         </div>
 
                         @php
-                            $heads = [['label' => 'ID', 'width' => 10], 'Chassi', 'Apartamento', 'Bloco', 'Condomínio', ['label' => 'Ações', 'no-export' => true, 'width' => 10]];
+                            $heads = [['label' => 'ID', 'width' => 10], 'Chassi', 'Loalização', 'Apartamento', 'Bloco', 'Condomínio', ['label' => 'Ações', 'no-export' => true, 'width' => 10]];
                             $config = [
                                 'ajax' => url('/admin/meters'),
-                                'columns' => [['data' => 'id', 'name' => 'id'], ['data' => 'register', 'name' => 'register'], ['data' => 'apartment_name', 'name' => 'apartment_name'], ['data' => 'block_name', 'name' => 'block_name'], ['data' => 'complex_name', 'name' => 'complex_name'], ['data' => 'action', 'name' => 'action', 'orderable' => false, 'searchable' => false]],
+                                'columns' => [['data' => 'id', 'name' => 'id'], ['data' => 'register', 'name' => 'register'], ['data' => 'location', 'name' => 'location'], ['data' => 'apartment_name', 'name' => 'apartment_name'], ['data' => 'block_name', 'name' => 'block_name'], ['data' => 'complex_name', 'name' => 'complex_name'], ['data' => 'action', 'name' => 'action', 'orderable' => false, 'searchable' => false]],
                                 'language' => ['url' => asset('vendor/datatables/js/pt-BR.json')],
                                 'autoFill' => true,
                                 'processing' => true,

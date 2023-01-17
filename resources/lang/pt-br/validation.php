@@ -226,6 +226,7 @@ return [
         'block_id' => 'bloco',
         'register' => 'chassi',
         'apartment_id' => 'apartamento',
+        'location' => 'localização'
     ],
 
 ];

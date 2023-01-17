@@ -16,7 +16,7 @@ class CreateViewMeters extends Migration
     {
         DB::statement("
         CREATE OR REPLACE VIEW meters_view AS
-        SELECT m.id, m.register, m.apartment_id, a.name as apartment_name, b.id as block_id, b.name as block_name, c.id as complex_id, c.name as complex_name
+        SELECT m.id, m.register, m.location, m.apartment_id, a.name as apartment_name, b.id as block_id, b.name as block_name, c.id as complex_id, c.name as complex_name
         FROM meters as m
         LEFT JOIN apartments as a ON m.apartment_id = a.id
         LEFT JOIN blocks as b ON a.block_id = b.id
