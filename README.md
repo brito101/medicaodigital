@@ -5,5 +5,8 @@
 <ul>
     <li>ACL;</li>
     <li>User registration;</li>
-    <li>Condominium registration with its blocks and apartments;</li>
+    <li>Condominium registration;</li>
+    <li>Blocks registration;</li>
+    <li>Apartments registration;</li>
+    <li>Meters registration;</li>
 </ul>

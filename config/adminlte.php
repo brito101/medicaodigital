@@ -324,6 +324,26 @@ return [
             ]
         ],
         [
+            'text'        => 'Medidores',
+            'url'         => '#',
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
+            'can'         => 'Acessar Medidores',
+            'submenu' => [
+                [
+                    'text' => 'Listagem de Medidores',
+                    'url'  => 'admin/meters',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Listar Medidores',
+                ],
+                [
+                    'text' => 'Cadastrar Medidores',
+                    'url'  => 'admin/meters/create',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Criar Medidores',
+                ],
+            ]
+        ],
+        [
             'text'    => 'ACL',
             'icon'    => 'fas fa-fw fa-user-shield',
             'can'     => 'Acessar ACL',

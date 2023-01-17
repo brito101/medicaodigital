@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\ComplexRequest;
 use App\Models\Apartment;
 use App\Models\Block;
 use App\Models\Complex;
+use App\Models\Meter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DataTables;
@@ -167,6 +168,10 @@ class ComplexController extends Controller
             foreach ($blocks as $block) {
                 $apartments = Apartment::where('block_id', $block->id)->get();
                 foreach ($apartments as $apartment) {
+                    $meters = Meter::where('apartment_id', $apartment->id)->get();
+                    foreach ($meters as $meter) {
+                        $meter->delete();
+                    }
                     $apartment->delete();
                 }
                 $block->delete();

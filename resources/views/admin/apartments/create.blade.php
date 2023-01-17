@@ -41,7 +41,7 @@
 
                                 <div class="d-flex flex-wrap justify-content-start">
                                     <div class="col-12 col-md-6 form-group px-0 pr-md-2">
-                                        <label for="name">Nome do Bloco</label>
+                                        <label for="name">Nome do Apartamento</label>
                                         <input type="text" class="form-control" id="name"
                                             placeholder="Nome do Bloco" name="name" value="{{ old('name') }}" required>
                                     </div>

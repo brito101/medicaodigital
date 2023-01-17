@@ -224,6 +224,8 @@ return [
         'photo' => 'foto',
         'complex_id' => 'condomínio',
         'block_id' => 'bloco',
+        'register' => 'chassi',
+        'apartment_id' => 'apartamento',
     ],
 
 ];

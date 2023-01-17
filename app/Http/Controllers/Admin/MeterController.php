@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ApartmentRequest;
+use App\Http\Requests\Admin\MeterRequest;
 use App\Models\Apartment;
-use App\Models\Block;
 use App\Models\Meter;
-use App\Models\Views\Apartment as ViewsApartment;
+use App\Models\Views\Meter as ViewsMeter;
 use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
 
-class ApartmentController extends Controller
+class MeterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,24 +20,24 @@ class ApartmentController extends Controller
      */
     public function index(Request $request)
     {
-        if (!Auth::user()->hasPermissionTo('Listar Apartamentos')) {
+        if (!Auth::user()->hasPermissionTo('Listar Medidores')) {
             abort(403, 'Acesso não autorizado');
         }
 
-        $apartments = ViewsApartment::query();
+        $meters = ViewsMeter::query();
 
         if ($request->ajax()) {
-            return Datatables::of($apartments)
+            return Datatables::of($meters)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a class="btn btn-xs btn-primary mx-1 shadow" title="Editar" href="apartments/' . $row->id . '/edit"><i class="fa fa-lg fa-fw fa-pen"></i></a>' . '<a class="btn btn-xs btn-danger mx-1 shadow" title="Excluir" href="apartments/destroy/' . $row->id . '" onclick="return confirm(\'Confirma a exclusão deste apartamento?\')"><i class="fa fa-lg fa-fw fa-trash"></i></a>';
+                    $btn = '<a class="btn btn-xs btn-primary mx-1 shadow" title="Editar" href="meters/' . $row->id . '/edit"><i class="fa fa-lg fa-fw fa-pen"></i></a>' . '<a class="btn btn-xs btn-danger mx-1 shadow" title="Excluir" href="meters/destroy/' . $row->id . '" onclick="return confirm(\'Confirma a exclusão deste medidor?\')"><i class="fa fa-lg fa-fw fa-trash"></i></a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return view('admin.apartments.index');
+        return view('admin.meters.index');
     }
 
     /**
@@ -48,13 +47,13 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->hasPermissionTo('Criar Apartamentos')) {
+        if (!Auth::user()->hasPermissionTo('Criar Medidores')) {
             abort(403, 'Acesso não autorizado');
         }
 
-        $blocks = Block::with('complex')->get();
+        $apartments = Apartment::with('block')->get();
 
-        return view('admin.apartments.create', compact('blocks'));
+        return view('admin.meters.create', compact('apartments'));
     }
 
     /**
@@ -63,17 +62,17 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ApartmentRequest $request)
+    public function store(MeterRequest $request)
     {
-        if (!Auth::user()->hasPermissionTo('Criar Apartamentos')) {
+        if (!Auth::user()->hasPermissionTo('Criar Medidores')) {
             abort(403, 'Acesso não autorizado');
         }
 
-        $apartment = Apartment::create($request->all());
+        $meter = Meter::create($request->all());
 
-        if ($apartment->save()) {
+        if ($meter->save()) {
             return redirect()
-                ->route('admin.apartments.index')
+                ->route('admin.meters.index')
                 ->with('success', 'Cadastro realizado!');
         } else {
             return redirect()
@@ -102,19 +101,19 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-        if (!Auth::user()->hasPermissionTo('Editar Apartamentos')) {
+        if (!Auth::user()->hasPermissionTo('Editar Medidores')) {
             abort(403, 'Acesso não autorizado');
         }
 
-        $apartment = Apartment::find($id);
+        $meter = Meter::find($id);
 
-        if (!$apartment) {
+        if (!$meter) {
             abort(403, 'Acesso não autorizado');
         }
 
-        $blocks = Block::with('complex')->get();
+        $apartments = Apartment::with('block')->get();
 
-        return view('admin.apartments.edit', \compact('apartment', 'blocks'));
+        return view('admin.meters.edit', \compact('meter', 'apartments'));
     }
 
     /**
@@ -124,21 +123,21 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApartmentRequest $request, $id)
+    public function update(MeterRequest $request, $id)
     {
-        if (!Auth::user()->hasPermissionTo('Editar Apartamentos')) {
+        if (!Auth::user()->hasPermissionTo('Editar Medidores')) {
             abort(403, 'Acesso não autorizado');
         }
 
-        $apartment = Apartment::find($id);
+        $meter = Meter::find($id);
 
-        if (!$apartment) {
+        if (!$meter) {
             abort(403, 'Acesso não autorizado');
         }
 
-        if ($apartment->update($request->all())) {
+        if ($meter->update($request->all())) {
             return redirect()
-                ->route('admin.apartments.index')
+                ->route('admin.meters.index')
                 ->with('success', 'Edição realizada!');
         } else {
             return redirect()
@@ -156,23 +155,19 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
-        if (!Auth::user()->hasPermissionTo('Excluir Apartamentos')) {
+        if (!Auth::user()->hasPermissionTo('Excluir Medidores')) {
             abort(403, 'Acesso não autorizado');
         }
 
-        $apartment = Apartment::find($id);
+        $meter = Meter::find($id);
 
-        if (!$apartment) {
+        if (!$meter) {
             abort(403, 'Acesso não autorizado');
         }
 
-        if ($apartment->delete()) {
-            $meters = Meter::where('apartment_id', $apartment->id)->get();
-            foreach ($meters as $meter) {
-                $meter->delete();
-            }
+        if ($meter->delete()) {
             return redirect()
-                ->route('admin.apartments.index')
+                ->route('admin.meters.index')
                 ->with('success', 'Exclusão realizada!');
         } else {
             return redirect()
