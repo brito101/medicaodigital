@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\ApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Block;
 use App\Models\Meter;
+use App\Models\Resident;
 use App\Models\Views\Apartment as ViewsApartment;
 use Illuminate\Http\Request;
 use DataTables;
@@ -170,6 +171,10 @@ class ApartmentController extends Controller
             $meters = Meter::where('apartment_id', $apartment->id)->get();
             foreach ($meters as $meter) {
                 $meter->delete();
+            }
+            $residents = Resident::where('apartment_id', $apartment->id)->get();
+            foreach ($residents as $resident) {
+                $resident->delete();
             }
             return redirect()
                 ->route('admin.apartments.index')

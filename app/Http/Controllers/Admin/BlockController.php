@@ -8,6 +8,7 @@ use App\Models\Apartment;
 use App\Models\Block;
 use App\Models\Complex;
 use App\Models\Meter;
+use App\Models\Resident;
 use App\Models\Views\Block as ViewsBlock;
 use Illuminate\Http\Request;
 use DataTables;
@@ -174,6 +175,10 @@ class BlockController extends Controller
                 $meters = Meter::where('apartment_id', $apartment->id)->get();
                 foreach ($meters as $meter) {
                     $meter->delete();
+                }
+                $residents = Resident::where('apartment_id', $apartment->id)->get();
+                foreach ($residents as $resident) {
+                    $resident->delete();
                 }
                 $apartment->delete();
             }

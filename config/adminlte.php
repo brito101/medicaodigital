@@ -343,6 +343,27 @@ return [
                 ],
             ]
         ],
+        /** Residents */
+        [
+            'text'        => 'Moradores',
+            'url'         => '#',
+            'icon'        => 'fas fa-fw fa-house-user',
+            'can'         => 'Acessar Moradores',
+            'submenu' => [
+                [
+                    'text' => 'Listagem de Moradores',
+                    'url'  => 'admin/residents',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Listar Moradores',
+                ],
+                [
+                    'text' => 'Cadastro de Moradores',
+                    'url'  => 'admin/residents/create',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Criar Moradores',
+                ],
+            ],
+        ],
         [
             'text'    => 'ACL',
             'icon'    => 'fas fa-fw fa-user-shield',

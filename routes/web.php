@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\{
     BlockController,
     ComplexController,
     MeterController,
+    ResidentController,
     UserController
 };
 use App\Http\Controllers\Site\{
@@ -45,6 +46,10 @@ Route::group(['middleware' => ['auth']], function () {
         /** Meters */
         Route::get('/meters/destroy/{id}', [MeterController::class, 'destroy']);
         Route::resource('meters', MeterController::class);
+
+        /** Residents */
+        Route::get('/residents/destroy/{id}', [ResidentController::class, 'destroy']);
+        Route::resource('residents', ResidentController::class);
 
         /**
          * ACL

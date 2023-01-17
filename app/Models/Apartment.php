@@ -24,4 +24,9 @@ class Apartment extends Model
     {
         return $this->hasMany(Meter::class);
     }
+
+    public function residents()
+    {
+        return $this->hasMany(Resident::class);
+    }
 }

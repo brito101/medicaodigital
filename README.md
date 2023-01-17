@@ -9,4 +9,5 @@
     <li>Blocks registration;</li>
     <li>Apartments registration;</li>
     <li>Meters registration;</li>
+    <li>Residents registration;</li>
 </ul>

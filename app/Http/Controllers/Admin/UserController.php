@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
+use App\Models\Resident;
 use App\Models\User;
 use App\Models\Views\User as ViewsUser;
 use Illuminate\Http\Request;
@@ -111,7 +112,6 @@ class UserController extends Controller
         if ($user->save()) {
             if (!empty($request->role)) {
                 $user->syncRoles($request->role);
-                $user->type = $request->role;
                 $user->save();
             }
             return redirect()
@@ -269,6 +269,11 @@ class UserController extends Controller
                 unlink($imagePath);
                 $user->photo = null;
                 $user->update();
+            }
+
+            $residents = Resident::where('user_id', $user->id)->get();
+            foreach ($residents as $resident) {
+                $resident->delete();
             }
 
             return redirect()

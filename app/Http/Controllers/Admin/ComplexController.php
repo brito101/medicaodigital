@@ -8,6 +8,7 @@ use App\Models\Apartment;
 use App\Models\Block;
 use App\Models\Complex;
 use App\Models\Meter;
+use App\Models\Resident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DataTables;
@@ -171,6 +172,10 @@ class ComplexController extends Controller
                     $meters = Meter::where('apartment_id', $apartment->id)->get();
                     foreach ($meters as $meter) {
                         $meter->delete();
+                    }
+                    $residents = Resident::where('apartment_id', $apartment->id)->get();
+                    foreach ($residents as $resident) {
+                        $resident->delete();
                     }
                     $apartment->delete();
                 }
