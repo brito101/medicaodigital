@@ -226,7 +226,10 @@ return [
         'block_id' => 'bloco',
         'register' => 'chassi',
         'apartment_id' => 'apartamento',
-        'location' => 'localização'
+        'location' => 'localização',
+        'date_ref' => 'data e refrência',
+        'consumption' => 'consumo',
+        'value' => 'valor',
     ],
 
 ];

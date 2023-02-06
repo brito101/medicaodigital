@@ -29,8 +29,13 @@ class Complex extends Model
     ];
 
     /** Relationships */
-    public function complex()
+    public function blocks()
     {
         return $this->hasMany(Block::class);
+    }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
     }
 }

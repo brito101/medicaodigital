@@ -364,6 +364,27 @@ return [
                 ],
             ],
         ],
+        /** Bills */
+        [
+            'text'        => 'Contas por Condomínio',
+            'url'         => '#',
+            'icon'        => 'fas fa-fw fa-money-bill',
+            'can'         => 'Acessar Contas',
+            'submenu' => [
+                [
+                    'text' => 'Listagem de Contas',
+                    'url'  => 'admin/bills',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Listar Contas',
+                ],
+                [
+                    'text' => 'Cadastro de Contas',
+                    'url'  => 'admin/bills/create',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Criar Contas',
+                ],
+            ],
+        ],
         [
             'text'    => 'ACL',
             'icon'    => 'fas fa-fw fa-user-shield',

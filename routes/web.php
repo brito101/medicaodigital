@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{
     ACL\RoleController,
     AdminController,
     ApartmentController,
+    BillController,
     BlockController,
     ComplexController,
     MeterController,
@@ -46,6 +47,10 @@ Route::group(['middleware' => ['auth']], function () {
         /** Meters */
         Route::get('/meters/destroy/{id}', [MeterController::class, 'destroy']);
         Route::resource('meters', MeterController::class);
+
+        /** Bills */
+        Route::get('/bills/destroy/{id}', [BillController::class, 'destroy']);
+        Route::resource('bills', BillController::class);
 
         /** Residents */
         Route::get('/residents/destroy/{id}', [ResidentController::class, 'destroy']);

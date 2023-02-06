@@ -50,7 +50,7 @@
                         </div>
 
                         <!-- countdown__module hide undefined -->
-                        <div class="countdown__module hide undefined" data-date="2023/02/16">
+                        <div class="countdown__module hide undefined" data-date="2023/03/16">
                             <p><span>%D</span> Dias</p>
                             <p><span>%H</span> Horas</p>
                             <p><span>%M</span> Minutos</p>
