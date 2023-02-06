@@ -9,6 +9,7 @@
     <li>Apartments registration;</li>
     <li>Meters registration;</li>
     <li>Residents registration;</li>
+    <li>Bills registration.</li>
 </ul>
 
 <h5>Business Rules</h5>
