@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BillRequest;
 use App\Models\Bill;
+use App\Models\Complex;
 use App\Models\Views\Bill as ViewsBill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +47,13 @@ class BillController extends Controller
      */
     public function create()
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Criar Contas')) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $complexes = Complex::select('id', 'name')->get();
+
+        return view('admin.bills.create', compact('complexes'));
     }
 
     /**
@@ -54,9 +62,24 @@ class BillController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BillRequest $request)
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Criar Contas')) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $bill = Bill::create($request->all());
+
+        if ($bill->save()) {
+            return redirect()
+                ->route('admin.bills.index')
+                ->with('success', 'Cadastro realizado!');
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Erro ao cadastrar!');
+        }
     }
 
     /**
@@ -78,7 +101,19 @@ class BillController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Editar Contas')) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $complexes = Complex::select('id', 'name')->get();
+
+        return view('admin.bills.edit', compact('complexes', 'bill'));
     }
 
     /**
@@ -88,9 +123,28 @@ class BillController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BillRequest $request, $id)
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Editar Contas')) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        if ($bill->update($request->all())) {
+            return redirect()
+                ->route('admin.bills.index')
+                ->with('success', 'Edição realizada!');
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Erro ao cadastrar!');
+        }
     }
 
     /**
@@ -101,6 +155,25 @@ class BillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!Auth::user()->hasPermissionTo('Excluir Contas')) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        if ($bill->delete()) {
+            return redirect()
+                ->route('admin.bills.index')
+                ->with('success', 'Exclusão realizada!');
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Erro ao cadastrar!');
+        }
     }
 }

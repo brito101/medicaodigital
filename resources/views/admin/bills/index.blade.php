@@ -33,8 +33,8 @@
                             <div class="d-flex flex-wrap justify-content-between col-12 align-content-center">
                                 <h3 class="card-title align-self-center">Contas por Condomínios Cadastradas</h3>
                                 @can('Criar Blocos')
-                                    <a href="{{ route('admin.blocks.create') }}" title="Novo Bloco" class="btn btn-success"><i
-                                            class="fas fa-fw fa-plus"></i>Novo Bloco</a>
+                                    <a href="{{ route('admin.bills.create') }}" title="Nova Conta" class="btn btn-success"><i
+                                            class="fas fa-fw fa-plus"></i>Nova Conta</a>
                                 @endcan
                             </div>
                         </div>

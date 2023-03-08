@@ -19,4 +19,15 @@ class Bill extends Model
     {
         return $this->belongsTo(Complex::class);
     }
+
+    /** Accessors */
+    public function getConsumptionAttribute($value)
+    {
+        return number_format($value, 2, ",", ".");
+    }
+
+    public function getValueAttribute($value)
+    {
+        return 'R$ ' . number_format($value, 2, ",", ".");
+    }
 }

@@ -20,7 +20,7 @@ class Bill extends Model
     /** Accessors */
     public function getDateFormatAttribute($value)
     {
-        return date('m/Y', strtotime($this->date_ref));
+        return date('d/m/Y', strtotime($this->date_ref));
     }
 
     public function getConsumptionFormatAttribute($value)

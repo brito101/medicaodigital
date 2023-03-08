@@ -19,6 +19,8 @@ mix.js("resources/js/app.js", "public/js")
     .scripts(["resources/js/company.js"], "public/js/company.js")
     .scripts(["resources/js/address.js"], "public/js/address.js")
     .scripts(["resources/js/phone.js"], "public/js/phone.js")
+    .scripts(["resources/js/money.js"], "public/js/money.js")
+    .scripts(["resources/js/float.js"], "public/js/float.js")
     /** LaunchPage */
     .copy("resources/launch_page/assets/fonts", "public/launch_page/fonts")
     .copy(

@@ -19,7 +19,7 @@ class BillRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'consumption' => $this->consumption > 1 ? str_replace(',', '.', str_replace('.', '', $this->consumption)) : 0,
+            'consumption' => $this->consumption ? str_replace(',', '.', str_replace('.', '', $this->consumption)) : 0,
             'value' => $this->value ? str_replace(',', '.', str_replace('.', '', str_replace('R$ ', '', $this->value))) : 0,
         ]);
     }
@@ -32,10 +32,10 @@ class BillRequest extends FormRequest
     public function rules()
     {
         return [
-            'date_ref' => 'date_format:Y-m',
+            'date_ref' => 'date_format:Y-m-d',
             'consumption' => 'nullable|numeric|between:0,999999999.999',
             'value' => 'nullable|numeric|between:0,999999999.999',
-            'complex_id' => 'exists:complex,id'
+            'complex_id' => 'exists:complexes,id'
         ];
     }
 
