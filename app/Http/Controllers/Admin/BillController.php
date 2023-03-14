@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BillRequest;
+use App\Models\Apartment;
 use App\Models\Bill;
 use App\Models\Complex;
+use App\Models\Report;
 use App\Models\Views\Bill as ViewsBill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +32,9 @@ class BillController extends Controller
             return Datatables::of($bills)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a class="btn btn-xs btn-primary mx-1 shadow" title="Editar" href="bills/' . $row->id . '/edit"><i class="fa fa-lg fa-fw fa-pen"></i></a>' . '<a class="btn btn-xs btn-danger mx-1 shadow" title="Excluir" href="bills/destroy/' . $row->id . '" onclick="return confirm(\'Confirma a exclusão desta conta?\')"><i class="fa fa-lg fa-fw fa-trash"></i></a>';
+                    $btn = '<a class="btn btn-xs btn-primary mx-1 shadow" title="Editar" href="bills/' . $row->id . '/edit"><i class="fa fa-lg fa-fw fa-pen"></i></a>' .
+                        '<a class="btn btn-xs btn-danger mx-1 shadow" title="Excluir" href="bills/destroy/' . $row->id . '" onclick="return confirm(\'Confirma a exclusão desta conta?\')"><i class="fa fa-lg fa-fw fa-trash"></i></a>' .
+                        '<a class="btn btn-xs btn-success mx-1 shadow" title="Relatório" href="bills/' . $row->id . '/reports"><i class="fa fa-lg fa-fw fa-file"></i></a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -175,5 +179,67 @@ class BillController extends Controller
                 ->withInput()
                 ->with('error', 'Erro ao cadastrar!');
         }
+    }
+
+    public function reports($id)
+    {
+        if (!Auth::user()->hasPermissionTo('Criar Relatórios')) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        return view('admin.bills.report', compact('bill'));
+    }
+
+    public function reportsStore(Request $request, $id)
+    {
+        if (!Auth::user()->hasPermissionTo('Criar Relatórios')) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $apartments = Apartment::whereIn('block_id', $bill->complex->blocks->pluck('id'))->get();
+
+        foreach ($apartments as $apartment) {
+            $value = str_replace(',', '.', str_replace('.', '', str_replace('R$ ', '', $request['value_' . $apartment->id])));
+            $consumption = str_replace(',', '.', str_replace('.', '', $request['consumption_' . $apartment->id]));
+
+            try {
+                $report = Report::where('apartment_id', $apartment->id)->where('bill_id', $id)->first();
+                if ($report) {
+                    $report->value = $value;
+                    $report->consumption = $consumption;
+                    $report->update();
+                } else {
+                    $data = [
+                        'bill_id' => $id,
+                        'apartment_id' => $apartment->id,
+                        'value' => $value,
+                        'consumption' => $consumption
+                    ];
+                    $report = Report::create($data);
+                    $report->save();
+                }
+            } catch (\Exception $e) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', 'Erro ao cadastrar!');
+            }
+        }
+
+        return redirect()
+            ->route('admin.bills.index')
+            ->with('success', 'Relatório salvo!');
     }
 }

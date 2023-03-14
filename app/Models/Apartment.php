@@ -29,4 +29,16 @@ class Apartment extends Model
     {
         return $this->hasMany(Resident::class);
     }
+
+    /** function */
+
+    public function getReport($id)
+    {
+        $report = Report::where('apartment_id', $this->id)->where('bill_id', $id)->first();
+        if ($report) {
+            return ['consumption' => $report->consumption, 'value' => $report->value];
+        } else {
+            return ['consumption' => 0, 'value' => 0];
+        }
+    }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\{
     BlockController,
     ComplexController,
     MeterController,
+    ReportController,
     ResidentController,
     UserController
 };
@@ -50,7 +51,13 @@ Route::group(['middleware' => ['auth']], function () {
 
         /** Bills */
         Route::get('/bills/destroy/{id}', [BillController::class, 'destroy']);
+        Route::get('/bills/{id}/reports', [BillController::class, 'reports']);
+        Route::post('/bills/{id}/reports', [BillController::class, 'reportsStore'])->name('reportsStore');
         Route::resource('bills', BillController::class);
+
+        /** Bills */
+        Route::get('/reports/destroy/{id}', [ReportController::class, 'destroy']);
+        Route::resource('reports', ReportController::class);
 
         /** Residents */
         Route::get('/residents/destroy/{id}', [ResidentController::class, 'destroy']);
