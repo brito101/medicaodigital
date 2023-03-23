@@ -385,27 +385,6 @@ return [
                 ],
             ],
         ],
-        /** Reports */
-        [
-            'text'        => 'Relatórios de Consumo',
-            'url'         => '#',
-            'icon'        => 'fas fa-fw fa-file',
-            'can'         => 'Acessar Contas',
-            'submenu' => [
-                [
-                    'text' => 'Listagem de Relatórios',
-                    'url'  => 'admin/reports',
-                    'icon' => 'fas fa-fw fa-chevron-right',
-                    'can'  => 'Listar Relatórios',
-                ],
-                [
-                    'text' => 'Cadastro de Relatórios',
-                    'url'  => 'admin/reports/create',
-                    'icon' => 'fas fa-fw fa-chevron-right',
-                    'can'  => 'Criar Relatórios',
-                ],
-            ],
-        ],
         [
             'text'    => 'ACL',
             'icon'    => 'fas fa-fw fa-user-shield',
