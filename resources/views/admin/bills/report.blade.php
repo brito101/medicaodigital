@@ -91,7 +91,8 @@
 
                                                 <div class="col-12 col-md-4 form-group px-0 pl-md-2">
                                                     <label for="value">Valor</label>
-                                                    <input type="text" class="form-control money_format_2"
+                                                    <input type="text"
+                                                        class="form-control money_format_2 apartment_value"
                                                         id="value_{{ $apartment->id }}" name="value_{{ $apartment->id }}"
                                                         value="{{ old('value_' . $apartment->id) ?? $apartment->getReport($bill->id)['value'] }}"
                                                         required>
@@ -99,6 +100,22 @@
                                             </div>
                                         @endforeach
                                     @endforeach
+
+                                </div>
+
+                                <div class="d-flex flex-wrap justify-content-end col-12 px-0">
+                                    <div class="col-12 col-md-4 form-group px-0 px-md-2">
+                                        <label for="total_consumed">Total m<sup>3</sup> (Condomínio:
+                                            {{ $bill->consumption }})</label>
+                                        <input type="text" class="form-control float" id="total_consumed"
+                                            name="total_consumed" value="{{ $totalConsumption }}" disabled>
+                                    </div>
+                                    <div class="col-12 col-md-4 form-group px-0 pl-md-2">
+                                        <label for="total_value">Total R$ (Condomínio:
+                                            {{ $bill->value }})</label>
+                                        <input type="text" class="form-control money_format_2" id="total_value"
+                                            name="total_value" value="{{ $totalValue }}" disabled>
+                                    </div>
                                 </div>
 
                             </div>
@@ -124,9 +141,39 @@
         const consumption = Number(('{{ $bill->consumption }}').replace('.', '').replace(',', '.'));
         const value = Number(('{{ $bill->value }}').replace('R$ ', '').replace('.', '').replace(',', '.'));
         const tax = value / consumption;
+        let totalConsumption = {{ $totalConsumption }};
+        let totalValue = {{ $totalValue }};
+
+        function sumConsumption() {
+            totalConsumption = 0;
+            $(".consumption").each(function() {
+                if (!isNaN(this.value)) {
+                    totalConsumption += Number(this.value);
+                }
+            });
+            $("#total_consumed").val(totalConsumption);
+        }
+
+        function sumValue() {
+            totalValue = 0;
+            $(".apartment_value").each(function() {
+                if (!isNaN(this.value)) {
+                    totalValue += Number(this.value);
+                }
+
+            });
+            $("#total_value").val(totalValue.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL'
+            }));
+        }
+
+
         $(".consumption").on('change', function(e) {
             let id = (e.target.id).replace('consumption', 'value');
-            $(`#${id}`).val(e.target.value * tax)
+            $(`#${id}`).val(e.target.value * tax);
+            sumConsumption();
+            sumValue();
         });
     </script>
 @endsection

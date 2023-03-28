@@ -76,8 +76,8 @@ class BillController extends Controller
 
         if ($bill->save()) {
             return redirect()
-                ->route('admin.bills.index')
-                ->with('success', 'Cadastro realizado!');
+                ->route('admin.reports', ['id' => $bill->id])
+                ->with('success', 'Cadastro realizado! Agora distribua o valor entre os apartamentos.');
         } else {
             return redirect()
                 ->back()
@@ -141,8 +141,8 @@ class BillController extends Controller
 
         if ($bill->update($request->all())) {
             return redirect()
-                ->route('admin.bills.index')
-                ->with('success', 'Edição realizada!');
+                ->route('admin.reports', ['id' => $bill->id])
+                ->with('success', 'Edição realizada! Agora autualize o valor entre os apartamentos.');
         } else {
             return redirect()
                 ->back()
@@ -193,7 +193,10 @@ class BillController extends Controller
             abort(403, 'Acesso não autorizado');
         }
 
-        return view('admin.bills.report', compact('bill'));
+        $totalConsumption = Report::where('bill_id', $bill->id)->sum('consumption');
+        $totalValue = Report::where('bill_id', $bill->id)->sum('value');
+
+        return view('admin.bills.report', compact('bill', 'totalConsumption', 'totalValue'));
     }
 
     public function reportsStore(Request $request, $id)

@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         /** Bills */
         Route::get('/bills/destroy/{id}', [BillController::class, 'destroy']);
-        Route::get('/bills/{id}/reports', [BillController::class, 'reports']);
+        Route::get('/bills/{id}/reports', [BillController::class, 'reports'])->name('reports');
         Route::post('/bills/{id}/reports', [BillController::class, 'reportsStore'])->name('reportsStore');
         Route::resource('bills', BillController::class);
 
